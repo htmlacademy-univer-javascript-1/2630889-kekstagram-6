@@ -1,8 +1,8 @@
-function checkStringLength(str, maxLength) {
+export function checkStringLength(str, maxLength) {
   return str.length <= maxLength;
 }
 
-function isPalindrome(str) {
+export function isPalindrome(str) {
   const normalizedStr = str.toLowerCase().replaceAll(' ', '');
 
   let reversedStr = '';

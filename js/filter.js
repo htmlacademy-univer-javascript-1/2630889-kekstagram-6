@@ -36,24 +36,30 @@ const debouncedRenderPictures = debounce(
 );
 
 const onFilterClick = (evt) => {
-  if (!evt.target.classList.contains('img-filters__button')) {
+  const clickedButton = evt.target.closest('.img-filters__button');
+
+  if (!clickedButton || !filtersElement.contains(clickedButton)) {
     return;
   }
 
-  const clickedButton = evt.target;
   if (clickedButton.id === currentFilter) {
     return;
   }
 
-  filtersElement
-    .querySelector('.img-filters__button--active')
-    .classList.remove('img-filters__button--active');
+  const activeBtn = filtersElement.querySelector('.img-filters__button--active');
+  if (activeBtn) {
+    activeBtn.classList.remove('img-filters__button--active');
+  }
+
   clickedButton.classList.add('img-filters__button--active');
   currentFilter = clickedButton.id;
   debouncedRenderPictures(getFilteredPictures());
 };
 
 const initFilter = (loadedPictures) => {
+  if (!loadedPictures) {
+    return;
+  }
   pictures = [...loadedPictures];
   filtersElement.classList.remove('img-filters--inactive');
   filtersElement.addEventListener('click', onFilterClick);

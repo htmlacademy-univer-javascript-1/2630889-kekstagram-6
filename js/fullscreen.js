@@ -48,7 +48,7 @@ const clearComments = () => {
 
 const updateCommentsCounter = () => {
   const totalComments = currentComments.length;
-  socialCommentCount.textContent = `${commentsShown} из ${totalComments} комментариев`;
+  socialCommentCount.innerHTML = `<span class="social__comment-shown-count">${commentsShown}</span> из <span class="social__comment-total-count">${totalComments}</span> комментариев`;
 };
 
 const renderComments = () => {
